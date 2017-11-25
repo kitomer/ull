@@ -31,7 +31,7 @@
 #ifndef ULL_H
 #define ULL_H
 
-#include "ull.h"
+#include "dynmem.h"
 
 typedef struct _ull ull;
 typedef struct _ullnode ullnode;

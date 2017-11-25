@@ -7,9 +7,6 @@ deps: cleandeps
 	curl -q "https://raw.githubusercontent.com/kitomer/dynmem/master/dynmem.c" > dynmem.c
 	curl -q "https://raw.githubusercontent.com/kitomer/dynmem/master/dynmem.h" > dynmem.h
 
-ull.o: ull.c
-	gcc $(CCOPTS) -c ull.c -o ull.o
-
 dynmem.o: dynmem.c
 	gcc $(CCOPTS) -fPIC -c dynmem.c -o dynmem.o 
 
@@ -17,16 +14,19 @@ ull.o: ull.c
 	gcc -$(CCOPTS) -fPIC -c ull.c -o ull.o 
 
 lib: dynmem.o ull.o
-	gcc -shared -fPIC -Wl,-soname,libdynmem.so.1 -o libdynmem.so.0.1.0 dynmem.o ull.o -lc
+	gcc -shared -fPIC -Wl,-soname,libull.so.1 -o libull.so.0.1.0 dynmem.o ull.o -lc
 
 install: lib
-	cp libdynmem.so.0.1.0 /usr/local/lib/libull.so.1
+	cp libull.so.0.1.0 /usr/local/lib/libull.so.1
 	ln -s /usr/local/lib/libull.so.1 /usr/local/lib/libull.so
 
 clean:
-	rm dynmem.o
-	rm ull.o
-	rm libull.so.0.1.0
+	rm -f dynmem.o ull.o libull.so.0.1.0
 	
 cleandeps:
-	@rm dynmem.o dynmem.h dynmem.c
+	rm -f dynmem.o dynmem.h dynmem.c
+
+test:
+	gcc $(CCOPTS) -c test.c -lull -o test.o 
+	
+	
