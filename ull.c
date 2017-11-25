@@ -10,18 +10,6 @@ struct _ullnode {
   void * elements [ ULL_ELEMENTS_PER_NODE ];
   size_t num_elements;
 };
-struct _ull {
-  // a dynmem from which to allocate the nodes
-  dynmem * nodes_memory;
-  // root node
-  ullnode * root;
-  // total size (for fast lookup)
-  //size_t num_elements;
-  // number of nodes (for fast lookup)
-  size_t num_nodes;
-  // compare function
-  ullcmpfunc cmpfunc;
-};
 
 // inits the list
 int ull_init( ull * u, dynmem * m, ullcmpfunc f )

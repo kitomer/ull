@@ -33,10 +33,23 @@
 
 #include "dynmem.h"
 
-typedef struct _ull ull;
-typedef struct _ullnode ullnode;
 typedef int (*ullcmpfunc)( void * a, void * b );
 typedef void (*ulldebugfunc)( void * a );
+typedef struct _ullnode ullnode;
+typedef struct _ull {
+	// don't mess with this...
+  // a dynmem from which to allocate the nodes
+  dynmem * nodes_memory;
+  // root node
+  ullnode * root;
+  // total size (for fast lookup)
+  //size_t num_elements;
+  // number of nodes (for fast lookup)
+  size_t num_nodes;
+  // compare function
+  ullcmpfunc cmpfunc;
+}
+ull;
 
 int ull_init( ull * u, dynmem * m, ullcmpfunc f );
 void ull_debug( ull * u, ulldebugfunc f );

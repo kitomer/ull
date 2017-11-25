@@ -21,12 +21,12 @@ install: lib
 	ln -s /usr/local/lib/libull.so.1 /usr/local/lib/libull.so
 
 clean:
-	rm -f dynmem.o ull.o libull.so.0.1.0
+	rm -f dynmem.o ull.o libull.so.0.1.0 test
 	
 cleandeps:
 	rm -f dynmem.o dynmem.h dynmem.c
 
-test:
-	gcc $(CCOPTS) -c test.c -lull -o test.o 
+test: test.c
+	gcc $(CCOPTS) -L. -lull test.c -o test
 	
 	
