@@ -35,7 +35,18 @@
 
 typedef int (*ullcmpfunc)( void * a, void * b );
 typedef void (*ulldebugfunc)( void * a );
-typedef struct _ullnode ullnode;
+
+#define ULL_ELEMENTS_PER_NODE 32
+
+// unrolled linked list structure (stored byte chunks)
+typedef struct _ullnode {
+  struct _ullnode * prev;
+  struct _ullnode * next;
+  void * elements [ ULL_ELEMENTS_PER_NODE ];
+  size_t num_elements;
+}
+ullnode;
+
 typedef struct _ull {
 	// don't mess with this...
   // a dynmem from which to allocate the nodes

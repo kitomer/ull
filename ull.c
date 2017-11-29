@@ -2,15 +2,6 @@
 
 #include "ull.h"
 
-// unrolled linked list structure (stored byte chunks)
-#define ULL_ELEMENTS_PER_NODE 32
-struct _ullnode {
-  struct _ullnode * prev;
-  struct _ullnode * next;
-  void * elements [ ULL_ELEMENTS_PER_NODE ];
-  size_t num_elements;
-};
-
 // inits the list
 int ull_init( ull * u, dynmem * m, ullcmpfunc f )
 {
